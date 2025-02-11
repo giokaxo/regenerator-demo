@@ -20,15 +20,33 @@ document.addEventListener('click', async (event) => {
     await sleep(1000);
     switch (action) {
       case 'api-keys':
-        showOutput(await client.apiKeys.getAll());
+        fetchApiKeys();
         break;
       case 'customers':
-        showOutput(await client.customers.getAll());
+        fetchCustomers();
         break;
       case 'value-lists':
-        showOutput(await client.lists.getAll());
+        fetchValueLists();
         break;
       case 'applications':
     }
   }
 });
+
+async function fetchCustomers() {
+  const customersCollection = await client.customers.getAll();
+  console.log(customersCollection);
+  showOutput(customersCollection);
+}
+
+async function fetchApiKeys() {
+  const apiKeysCollection = await client.apiKeys.getAll();
+  console.log(apiKeysCollection);
+  showOutput(apiKeysCollection);
+}
+
+async function fetchValueLists() {
+  const valueListsCollection = await client.lists.getAll();
+  console.log(valueListsCollection);
+  showOutput(valueListsCollection);
+}
