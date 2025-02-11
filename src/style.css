@@ -96,6 +96,18 @@ input {
   margin-top: 10px;
 }
 
+#render {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.product {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
