@@ -44,9 +44,29 @@ document.addEventListener('click', async (event) => {
     case 'value-lists':
       fetchValueLists();
       break;
-    case 'applications':
+    case 'products':
+      fetchProducts();
+      break;
   }
 });
+
+async function fetchProducts() {
+  const productsCollection = await client.products.getAll();
+  console.log('%cCollection', 'font-size: 16px;font-weight:bold;color:red');
+  console.log(productsCollection);
+  for (const item of productsCollection) {
+    console.log('%cItem', 'font-size: 16px;font-weight:bold;color:red');
+    console.log({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      options: item.options,
+      createdAt: item.createdTime,
+      updatedAt: item.updatedTime,
+    });
+  }
+  showOutput(productsCollection);
+}
 
 async function fetchCustomers() {
   const customersCollection = await client.customers.getAll();
