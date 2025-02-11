@@ -4,7 +4,7 @@ import Collection from '../sdk/collection';
 
 const outputEl = document.getElementById('output') as HTMLPreElement;
 const client = new Client({
-  apiKey: 'sk_sandbox_f6SPfpm_EbhKtbqbgzjG5vF8YuT7DgvXRZbUjVS',
+  apiKey: '',
 });
 
 function showOutput(data: Collection | string) {
