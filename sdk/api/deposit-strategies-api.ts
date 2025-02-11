@@ -1,0 +1,125 @@
+import type { AxiosRequestConfig } from 'axios';
+import type Client from '../client';  
+import Collection from '../collection';
+import Paginator from '../paginator';
+import DepositStrategy from '../models/deposit-strategy';
+
+
+export default class DepositStrategiesApi {
+  constructor(private client: Client) {}
+  async create({ 
+    depositStrategy }: {
+    depositStrategy: DepositStrategy
+  })  {
+    const uri = '/deposit-strategies';
+  
+    const requestConfig: AxiosRequestConfig = {
+      method: 'POST',
+      url: uri,
+      headers: {
+        Accept: 'application/json'
+      },
+      data: depositStrategy.jsonSerialize()
+    };
+    const response = await this.client.send(requestConfig);
+    return new DepositStrategy(response.data);
+  }
+  async delete({ 
+    id }: {
+    id: string
+  })  {
+    const pathParams = {id: id};
+  
+  
+    let uri = Object.keys(pathParams).reduce(
+      (str, key) => str.replace(`{${key}}`, pathParams[key as keyof typeof pathParams].toString()),
+      '/deposit-strategies/{id}'
+    );
+  
+    const requestConfig: AxiosRequestConfig = {
+      method: 'DELETE',
+      url: uri
+    };
+    return this.client.send(requestConfig);
+  }
+  async get({ 
+    id }: {
+    id: string
+  })  {
+    const pathParams = {id: id};
+  
+  
+    let uri = Object.keys(pathParams).reduce(
+      (str, key) => str.replace(`{${key}}`, pathParams[key as keyof typeof pathParams].toString()),
+      '/deposit-strategies/{id}'
+    );
+  
+    const requestConfig: AxiosRequestConfig = {
+      method: 'GET',
+      url: uri,
+      headers: {
+        Accept: 'application/json'
+      }
+    };
+    const response = await this.client.send(requestConfig);
+    return new DepositStrategy(response.data);
+  }
+  async getAll({ 
+    limit = null,
+    offset = null,
+    filter = null,
+    sort = null }: {
+    limit?: number | null,
+    offset?: number | null,
+    filter?: string | null,
+    sort?: Array<any> | null
+  }= {})  {
+    const queryParams = { 
+      ...(limit ? { limit: limit.toString() } : {}),
+      ...(offset ? { offset: offset.toString() } : {}),
+      ...(filter ? { filter: filter.toString() } : {}),
+      ...(sort ? { sort: sort.toString() } : {})
+    } as Record<string, string>;
+    const uri = '/deposit-strategies?' + new URLSearchParams(queryParams).toString();
+  
+    const requestConfig: AxiosRequestConfig = {
+      method: 'GET',
+      url: uri,
+      headers: {
+        Accept: 'application/json'
+      }
+    };
+    const response = await this.client.send(requestConfig);
+  
+    return new Collection<DepositStrategy>(
+      response.data.map((item: any) => new DepositStrategy(item)),
+      response.headers[Collection.HEADER_LIMIT],
+      response.headers[Collection.HEADER_OFFSET],
+      response.headers[Collection.HEADER_TOTAL],
+    );
+  }
+  async update({ 
+    id,
+    depositStrategy }: {
+    id: string,
+    depositStrategy: DepositStrategy
+  })  {
+    const pathParams = {id: id};
+  
+  
+    let uri = Object.keys(pathParams).reduce(
+      (str, key) => str.replace(`{${key}}`, pathParams[key as keyof typeof pathParams].toString()),
+      '/deposit-strategies/{id}'
+    );
+  
+    const requestConfig: AxiosRequestConfig = {
+      method: 'PUT',
+      url: uri,
+      headers: {
+        Accept: 'application/json'
+      },
+      data: depositStrategy.jsonSerialize()
+    };
+    const response = await this.client.send(requestConfig);
+    return new DepositStrategy(response.data);
+  }}

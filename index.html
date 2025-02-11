@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <h1>Regenerator Demo</h1>
+      <div class="card">
+        <button data-fetch="api-keys" class="fetch-button" type="button">Fetch API keys</button>
+        <button data-fetch="customers" class="fetch-button" type="button">Fetch customers</button>
+        <button data-fetch="value-lists" class="fetch-button" type="button">Fetch Value lists</button>
+      </div>
+      <div>
+        <h2>Output</h2>
+        <pre id="output"></pre>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
